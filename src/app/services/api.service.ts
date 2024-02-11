@@ -18,14 +18,14 @@ export class ApiService {
   private errorSubject = new BehaviorSubject<string>('');
   private totalPagesSubject = new BehaviorSubject<number>(0);
   totalPages$: Observable<number> = this.totalPagesSubject.asObservable(); // Expose as Observable
-  private token: string = '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';
-  private headers: HttpHeaders;
+  // private token: string = 'token';
+  // private headers: HttpHeaders;
 
 
   constructor(private http: HttpClient) {
-    this.headers = new HttpHeaders({
-      'Authorization': `token ${this.token}`
-    });
+    // this.headers = new HttpHeaders({
+    //   'Authorization': `token ${this.token}`
+    // });
     this.setPageSize(10);
 
     this.searchUserName.subscribe((userName) => {
@@ -51,13 +51,13 @@ export class ApiService {
     return this.searchUserName.asObservable();
   }
 
-  
 
+  
   // ########################## UserInfo Services #################################
 
   setUserInfoToLocalStorage(userName: string) {
     this.isLoadingSubject.next(true);
-    this.http.get(`https://api.github.com/users/${this.searchUserName.value}`, { headers: this.headers }).subscribe(
+    this.http.get(`https://api.github.com/users/${this.searchUserName.value}`).subscribe(
       (data: any) => {
         localStorage.setItem('userData', JSON.stringify(data));;
         // Save data to local storage
@@ -90,10 +90,10 @@ export class ApiService {
 
 
   // ########################## UserRepositories Services #################################
-
+  
   setReposToLocalStorage() {
     this.isLoadingSubject.next(true);
-    this.http.get<any[]>(`https://api.github.com/users/${this.searchUserName.value}/repos`, { headers: this.headers })
+    this.http.get<any[]>(`https://api.github.com/users/${this.searchUserName.value}/repos`)
       .subscribe(
         (repos: any[]) => {
           localStorage.setItem('userRepos', JSON.stringify(repos));
