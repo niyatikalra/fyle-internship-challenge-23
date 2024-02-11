@@ -1,0 +1,10 @@
+<div class="w-full bg-black py-8 flex items-center justify-center">
+  <input 
+    class="w-96 px-3 outline-none border-none"
+    type="text"
+    [(ngModel)]="userName"
+   placeholder="search username...."
+  />
+  <button class="text-white bg-[#6456FF] px-[20px]"
+  (click)="setUserName()" >Search</button>
+</div>

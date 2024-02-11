@@ -1,0 +1,34 @@
+<div *ngIf="(isLoading$ | async); else showOtherContent">
+  <app-loader></app-loader>
+</div>
+
+<ng-template #showOtherContent>
+  <!-- Your other content goes here -->
+  <div *ngIf="isError">Error fetching user info</div>
+
+  <div *ngIf="repos" class="w-[99%] mx-auto mt-1 flex justify-center bg-white rounded-t-lg">
+    <div class="grid grid-cols-2 gap-5 w-full">
+      <div *ngFor="let repo of repos" class="w-full rounded overflow-hidden shadow-xl repo-container">
+        <div class="px-6 py-4">
+          <!-- repo name -->
+          <div class="font-bold text-xl mb-2">{{ repo.name }}</div>
+
+          <!-- repo description -->
+          <p class="text-gray-700 text-base">{{ repo.description }}</p>
+        </div>
+
+        <!-- repo languages -->
+        <div class="px-6 pt-4 pb-2 language-container">
+          <ng-container *ngIf="repo.language; else showError">
+            <span *ngFor="let lang of repo.language.split(',')" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ lang }}</span>
+          </ng-container>
+
+          <!-- if language is NULL -->
+          <ng-template #showError>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">No Languages Mentioned</span>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

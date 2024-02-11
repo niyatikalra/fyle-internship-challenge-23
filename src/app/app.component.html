@@ -1,5 +1,14 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
-    Fyle Internship Challenge
-  </div>
+<app-search-user></app-search-user>
+
+<!-- Display other components only when there's no error message and a valid user name -->
+<div *ngIf="dataComing == true && errorMessage == false">
+  <app-user-info></app-user-info>
+  <app-page-size></app-page-size>
+  <app-user-repo></app-user-repo>
+  <app-pagination></app-pagination>
+</div>
+
+<!-- Display app-empty-zero-state only when there's an error message -->
+<div *ngIf="errorMessage == true && dataComing == false">
+  <app-empty-zero-state></app-empty-zero-state>
 </div>
