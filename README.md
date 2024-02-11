@@ -1,43 +1,48 @@
-# Fyle Frontend Challenge
 
-## Who is this for?
+## Deployed Application
+[Link to Deployed Application](https://fyle-angular-frontend-assignment.netlify.app/)
 
-This challenge is meant for candidates who wish to intern at Fyle and work with our engineering team. The candidate should be able to commit to at least 6 months of dedicated time for internship.
+## Description
+This project is a web application built with Angular that enables users to search for GitHub users by their username. Upon entering a username and clicking the search button, the application fetches information about the user including their basic details and repositories. The application provides pagination for the user's repositories, allowing the user to navigate through multiple pages of repositories.
 
-## Why work at Fyle?
+## Functionalities Covered
+- **Search User**: The `search-user` component handles the search functionality. Users can input a GitHub username, and upon clicking the search button, the application fetches and displays the user's information.
+- **User Info and User Repos**: The `user-info` and `user-repo` components display the basic details of the user and their repositories respectively. This includes the user's avatar, name, bio, and a list of repositories with their details.
+- **Pagination**: The `pagination` component manages server-side pagination. It allows users to navigate through multiple pages of repositories retrieved from the GitHub API. Additionally, it provides a dropdown to select the number of repositories per page, with a default of 10 repositories per page and a maximum of 100 repositories per page.
+- **Page Size**: The `page-size` component maintains the page size of repositories. Users can choose the number of repositories they want to see per page from a dropdown menu.
+- **Empty Zero State**: The `empty-zero-state` component displays an empty state when no user is found with the entered GitHub username. This provides a clear indication to the user that their search returned no results.
+- **Loader**: The application displays a skeleton loader while fetching data from the GitHub API to indicate that the request is in progress.
 
-Fyle is a fast-growing Expense Management SaaS product. We are ~40 strong engineering team at the moment. 
+## Functionalities Provided by the Company and Coverage
+- **Search by GitHub Username**: Implemented ✔️
+- **Zero State Display**: Implemented ✔️
+- **Server-side Pagination**: Implemented ✔️
+- **Page Size Configuration**: Implemented ✔️
+- **Loader for API Calls**: Implemented ✔️
+- **No duplicacy of API Calls**: Implemented ✔️
+- **Test cases**: Implemented ✔️
 
-We are an extremely transparent organization. Check out our [careers page](https://careers.fylehq.com) that will give you a glimpse of what it is like to work at Fyle. Also, check out our Glassdoor reviews [here](https://www.glassdoor.co.in/Reviews/Fyle-Reviews-E1723235.htm). You can read stories from our teammates [here](https://stories.fylehq.com).
 
-## Challenge outline
+## Technologies Used
+- **Frontend Framework**: Angular
+- **Styling**: Tailwind CSS
 
-This challenge involves implementing application using github api. 
 
-The services that you need to use are already implemented - check out ApiService.
+## Screenshots
+### 10 Repositories By Default
+![User Search](src/app/screenshots/10_repos_by_default.jpg)
 
-You can see details of this challenge [here](https://fyleuniverse.notion.site/fyleuniverse/Fyle-Frontend-development-challenge-cb5085e5e0864e769e7b98c694400aaa)
+### Data saved to mem and Not calling API agian and again
+![User Information](src/app/screenshots/data-saved-to-mem.jpg)
 
-__Note__ - This challenge is in angular. We work on angular frameworks & after you join we expect the same from you. Hence it is required to complete this assignement in angular itself.
+### zero-state
+![Pagination](src/app/screenshots/when-no-user-found.jpg)
 
-## What happens next?
 
-You will hear back within 48 hours from us via email.
 
-## Installation
 
-1. Fork this repository to your github account.
-2. Clone the forked repository and proceed with steps mentioned below.
-
-### Install requirements
-* Install angular cli [Ref](https://angular.io/cli)
-* `npm install` in this repository 
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Further help
-
-Visit the [Angular Documentation](https://angular.io/guide/styleguide) to learn more.
-Styling is to be strictly done with [Tailwind](https://tailwindcss.com/docs/installation).
+## Usage
+1. Enter a GitHub username in the search bar.
+2. Click the search button.
+3. View the user's information and repositories.
+4. Navigate through the pages of repositories using pagination.
