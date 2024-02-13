@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class PaginationComponent implements OnInit {
   totalPages: number = 0;
   currentPage: number = 1; // Set the current page to 1 by default
+  PageSize!: number;
   private totalPagesSubscription!: Subscription;
 
 
@@ -27,13 +28,18 @@ export class PaginationComponent implements OnInit {
       if (currPage) this.currentPage = currPage;
     });
 
+    this.apiService.getPageSize().subscribe(pageSize => {
+      if(pageSize) this.PageSize = pageSize;
+    })
+
   }
 
 
   changePage(page: number) {
     this.currentPage = page;
     this.apiService.setCurrPage(this.currentPage);
-    this.apiService.getReposFromLocalStorage();
+   
+    this.apiService.setReposToCache(this.currentPage,this.PageSize);
 
   }
 

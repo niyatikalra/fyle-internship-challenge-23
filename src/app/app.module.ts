@@ -12,6 +12,7 @@ import { PageSizeComponent } from './components/page-size/page-size.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { EmptyZeroStateComponent } from './components/empty-zero-state/empty-zero-state.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { RepoSkeletonLoaderComponent } from "./components/repo-skeleton-loader/repo-skeleton-loader.component"
 
 
 
@@ -26,6 +27,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     LoaderComponent,
     EmptyZeroStateComponent,
     PaginationComponent,
+    RepoSkeletonLoaderComponent,
     
   ],
   imports: [

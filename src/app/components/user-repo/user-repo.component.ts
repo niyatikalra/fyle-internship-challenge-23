@@ -14,24 +14,23 @@ export class UserRepoComponent implements OnInit, OnDestroy {
   private searchSubscription!: Subscription;
   private reposSubscription!: Subscription;
   private currentPageSubscription!: Subscription;
- 
-
-
+  
   userName: any;
   repos: any[] = [];
   isLoading: boolean = true;
   isError: boolean = false;
   currentPage: number = 1; // Initialize currentPage
   pageSize: number = 10; // Initialize pageSize
-  isLoading$!: Observable<boolean>; 
+  reposLoadingSubject$!: Observable<boolean>;
 
 
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.isLoading$ = this.apiService.isLoading$;
-  // Subscribe to changes in user name
+    this.reposLoadingSubject$ = this.apiService.reposLoading$;
+
+    // Subscribe to changes in user name
     this.searchSubscription = this.apiService.getUserName().subscribe((term) => {
       if (term) {
         this.currentPage = 1;
@@ -45,11 +44,11 @@ export class UserRepoComponent implements OnInit, OnDestroy {
       this.getRepos();
     });
 
-      // Subscribe to changes in page size
-      this.apiService.getPageSize().subscribe((size) => {
-        this.pageSize = size;
-        this.getRepos();
-      });
+    // Subscribe to changes in page size
+    this.apiService.getPageSize().subscribe((size) => {
+      this.pageSize = size;
+      this.getRepos();
+    });
 
 
   }
@@ -71,7 +70,7 @@ export class UserRepoComponent implements OnInit, OnDestroy {
   initializeRepos() {
     this.apiService.setCurrPage(1);
     this.apiService.getRepos().subscribe((repos) => {
-      this.repos = repos.slice(0, 10);
+      this.repos = repos;
       this.isLoading = false;
     });
   }
@@ -79,10 +78,11 @@ export class UserRepoComponent implements OnInit, OnDestroy {
   //getting user Repositries Data from LocalStorage so that page doesn't load
   getRepos() {
     this.isLoading = true;
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.repos = this.apiService.getReposFromLocalStorage().slice(startIndex, endIndex);
-    this.isLoading = false;
+    this.apiService.setReposToCache(this.currentPage, this.pageSize)
+    this.apiService.getRepos().subscribe((repos) => {
+      this.repos = repos;
+      this.isLoading = false;
+    });
   }
 
 
